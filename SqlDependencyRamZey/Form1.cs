@@ -30,23 +30,13 @@ namespace SqlDependencyRamZey
 
         public SqlTableDependency<Ogrenci> ogrenciTableDependency;
 
-        string connection_string_people = "Data Source=RAMBO3;Initial Catalog = Deneme; Persist Security Info=True;User ID = sa; Password=sqlşifresi";
+        string connectionString = "Data Source=RAMBO3;Initial Catalog = Deneme; Persist Security Info=True;User ID = sa; Password=sqlşifresi";
 
         private void button1_Click(object sender, EventArgs e)
         {
-            refreshTable();
             startOgrenciTableDependency();
         }
-        private void refreshTable()
-        {
-            string sql = "SELECT * FROM Ogrenci";
-            SqlConnection connection = new SqlConnection(connection_string_people);
-            SqlDataAdapter dataadapter = new SqlDataAdapter(sql, connection);
-            DataSet ds = new DataSet();
-            connection.Open();
-            dataadapter.Fill(ds, "Ogrenci");
-            connection.Close();
-        }
+        
 
         public void mesajYaz(string mesaj)
         {
@@ -72,7 +62,7 @@ namespace SqlDependencyRamZey
         {
             try
             {
-                ogrenciTableDependency = new SqlTableDependency<Ogrenci>(connection_string_people);
+                ogrenciTableDependency = new SqlTableDependency<Ogrenci>(connectionString);
                 ogrenciTableDependency.OnChanged += ogrenciTableDependency_Changed;
                 ogrenciTableDependency.OnError += ogrenciTableDependency_OnError;
                 ogrenciTableDependency.Start();
@@ -116,10 +106,7 @@ namespace SqlDependencyRamZey
                 {
                     case ChangeType.Insert:
                         {
-
-
                             mesajYaz("Insert values:\tname:" + changedEntity.ad.ToString() + "\tage:" + changedEntity.yas.ToString());
-                            refreshTable();
 
                         }
                         break;
@@ -127,15 +114,12 @@ namespace SqlDependencyRamZey
                     case ChangeType.Update:
                         {
                             mesajYaz("Update values:\tname:" + changedEntity.ad.ToString() + "\tage:" + changedEntity.yas.ToString());
-                            refreshTable();
-
                         }
                         break;
 
                     case ChangeType.Delete:
                         {
                             mesajYaz("Delete values:\tname:" + changedEntity.ad.ToString() + "\tage:" + changedEntity.yas.ToString());
-                            refreshTable();
                         }
                         break;
                 };
