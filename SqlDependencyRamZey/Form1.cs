@@ -1,13 +1,7 @@
 ﻿using SqlDependencyRamZey.SqlListening;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TableDependency.SqlClient;
 using TableDependency.SqlClient.Base.Enums;
@@ -26,6 +20,8 @@ namespace SqlDependencyRamZey
         kullandığımız paket
         Install-Package SqlTableDependency -Version 8.5.8
 
+        kaynak : https://www.youtube.com/watch?v=vFtYDQaw81w
+
          */
         public Form1()
         {
@@ -34,7 +30,7 @@ namespace SqlDependencyRamZey
 
         public SqlTableDependency<Ogrenci> ogrenciTableDependency;
 
-        string connection_string_people = "Data Source=RAMBO3;Initial Catalog = Deneme; Persist Security Info=True;User ID = sa; Password=19830126";
+        string connection_string_people = "Data Source=RAMBO3;Initial Catalog = Deneme; Persist Security Info=True;User ID = sa; Password=sqlşifresi";
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -151,7 +147,5 @@ namespace SqlDependencyRamZey
             }
 
         }
-
-
     }
 }
